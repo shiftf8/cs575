@@ -18,13 +18,16 @@ int main()
 	
 	cout << "Please enter your initials (FirstMiddleLast) without spaces or punctuation. \n";
 	cin >> initials;
-	cout << initials << endl;
+//	cout << initials << endl;
 	cout << "Please enter three lengths (number number number) separated by spaces, to create a triangle. \n";
 	cin >> a >> b >> c;
-	cout << a << " " << b << " " << c << endl;
+//	cout << a << " " << b << " " << c << endl;
 	
 	//Checking to see the values entered can make a triangle. If NOT, stop program.
-	if (!((a + b) > c) || !((b + c) > a) || !((c + a) > b))
+	//Ask professor if this actually saves cycles?
+	//if (!(a + b > c) || !(b + c > a) || !(c + a > b))
+	//This expression is easier to read
+	if (((a + b > c) || (b + c > a) || (c + a > b)) != true)
 	{
 		cout << endl << initials << ", you have entered dimensions that cannot make a triangle. Please re-run the program to try again. \n";
 	}
