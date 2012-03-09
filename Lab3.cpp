@@ -10,9 +10,8 @@ using namespace std;
 
 int main()
 {
-    string initials;
-	float a, b, c;
-	double cosA, cosB, cosC;
+	string initials;
+	double a, b, c, cosA, cosB, cosC;
 	const float PI = 3.14159;
 	
 	cout << "Please enter your initials (FirstMiddleLast) without spaces or punctuation. \n";
