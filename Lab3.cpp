@@ -12,7 +12,7 @@ int main()
 {
     string initials;
 	float a, b, c;
-	double radianA, radianB, radianC;
+	double cosA, cosB, cosC;
 	const float PI = 3.14159;
 	
 	cout << "Please enter your initials (FirstMiddleLast) without spaces or punctuation. \n";
@@ -40,21 +40,21 @@ int main()
 			else
 			{
 				//Calculate if triangle has a right angle using law of cosines.
-				radianC = acos((pow(a, 2) + pow(b, 2) - pow(c, 2))/(2*a*b));
-				cout << radianC << endl;
-				if ((radianC > 1.5707 && radianC < 1.58))
-					radianC = 1;
-				radianB = acos((pow(c, 2) + pow(a, 2) - pow(b, 2))/(2*c*a));
-				cout << radianB << endl;
-				if ((radianB > 1.5707 && radianB < 1.58))
-					radianB = 1;
-				radianA = acos((pow(b, 2) + pow(c, 2) - pow(a, 2))/(2*b*c));
-				cout << radianA << endl;
-				if ((radianA > 1.5707 && radianA < 1.58))
-					radianA = 1;
+				cosC = acos((pow(a, 2) + pow(b, 2) - pow(c, 2))/(2*a*b));
+				//cout << cosC << endl;
+				if ((cosC > 1.5707 && cosC < 1.58))
+					cosC = 1;
+				cosB = acos((pow(c, 2) + pow(a, 2) - pow(b, 2))/(2*c*a));
+				//cout << cosB << endl;
+				if ((cosB > 1.5707 && cosB < 1.58))
+					cosB = 1;
+				cosA = acos((pow(b, 2) + pow(c, 2) - pow(a, 2))/(2*b*c));
+				//cout << cosA << endl;
+				if ((cosA > 1.5707 && cosA < 1.58))
+					cosA = 1;
 				
 				//Check if triangle has a 90 degree angle. If NOT, output isosceles or scalene.
-				if ((radianA == 1) || (radianB == 1) || (radianC == 1))
+				if ((cosA == 1) || (cosB == 1) || (cosC == 1))
 				{
 					//Check if triangle is isosceles right triangle. If NOT, it must be a scalene right triangle.
 					if ((a == b) || (b == c) || (c == a))
