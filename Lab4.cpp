@@ -21,14 +21,14 @@ int main() {
 			assignment.
 		*/
 	
-		//Check if user input is outside of 0 and 1000.		
+		//Check if user input is outside of 0 and 1000.
 		if (userInput <= 0 && userInput >= 1000) {
-			cout << "You have not entered a number from 1 to 1000. Please try again or enter 0 to quit: \n";
+			cout << userInput << " is not a valid entry.\nEnter an integer from 1 to 1000 or enter 0 to quit: \n";
 			cin >> userInput;
-			cout << userInput << endl;
+			//cout << userInput << endl;
 			
 		} else {
-			cout << "Enter a number from 1 to 1000 or enter 0 to quit: \n";
+			cout << "Enter an integer from 1 to 1000 or enter 0 to quit: \n";
 			cin >> userInput;
 			//cout << userInput << endl;
 			
@@ -36,15 +36,18 @@ int main() {
 			if (userInput == 0) break;
 			//Check if user input is outside of 0 and 1000.
 			if ((userInput < 0) || (userInput > 1000)) {
-				cout << "You have not entered a number from 1 to 1000. ";
+				cout << userInput << " is not a valid entry.\n";
 				continue;
 			}
 		
 			//Loop through all possible divisors of user input.
 			for (i = 1, j = 0, isDivisible = 0, isPerfect = 0; userInput != i; i++) {
-				isDivisible = userInput % i;
-				if (isDivisible == 0) isPerfect = isPerfect + i;
-				j++;
+				isDivisible = userInput % i; //Checking if user input is divisible.
+				if (isDivisible == 0) {
+					isPerfect = isPerfect + i; //Checking if user input is perfect.
+					j++; //Counting number of times user input is evenly divisible.
+					
+				}
 				//cout << userInput << " " << isDivisible << " " << i << " " << j << endl;
 			}
 			
@@ -55,12 +58,34 @@ int main() {
 			if (j == 1) cout << userInput << " is prime." << endl;
 			
 			//Check if number is perfect.
-			if (userInput == isPerfect) cout << userInput << " is perfect." << endl;
+			if (userInput == isPerfect) {
+				cout << userInput << " is perfect." << endl;
+				cout << "Divisors include: ";
+				i = 1;
+				while (userInput != i) {
+					isDivisible = userInput % i;
+					if (isDivisible == 0) {
+						cout << i << " ";
+					}
+					i++;
+				}
+				cout << endl;
 			
 			//Number must not be prime.
-			else if (j > 1) cout << userInput << " is not prime." << endl;
-		}
-			
+			} else if (j > 1) {
+				cout << userInput << " is not prime." << endl;
+				cout << "Divisors include: ";
+				i = 1;
+				while (userInput != i) {
+					isDivisible = userInput % i;
+					if (isDivisible == 0) {
+						cout << i << " ";
+					}
+					i++;
+				}
+				cout << endl;
+			}
+		}			
 	} while (userInput != 0); //Loop until 0 is entered.
 	cout << "You have entered 0. Thank you for playing.\n";
 
