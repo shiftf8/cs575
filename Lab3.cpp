@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	string initials;
+    string initials;
 	double a, b, c, cosA, cosB, cosC;
 	const float PI = 3.14159;
 	
@@ -23,7 +23,7 @@ int main()
 	
 	//Checking to see the values entered can make a triangle. If NOT, stop program.
 	//Ask professor if this actually saves cycles? Does not save cycles.
-	if ((a <= 0) || (b <= 0) || (c <= 0))
+	if ((a < 1) || (b < 1) || (c < 1))
 		cout << endl << initials << ", you have entered dimensions that cannot make a triangle. Please re-run the program to try again. \n";
 	else
 	{
