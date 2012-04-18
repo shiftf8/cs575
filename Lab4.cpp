@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     
-	int userInt = 0;
+    int userInt = 0;
 	string strInput;
 	size_t found;
 	int isDivisible, isPerfect;
@@ -28,12 +28,7 @@ int main() {
 		//Search string input for decimal/period.
 		found=strInput.find('.');
 		
-		//Check if user input becomes zero. Means characters were encountered first. Not a valid integer.
-		if ((userInt == 0) && (strInput != "0")) {
-			cout << strInput << " is not a valid entry.\n";
-		
-		//Check if user input encounters period. Means period/decimal was found. Not a valid integer.
-		} else if (found!=string::npos) {
+		if (found!=string::npos) {
 			cout << strInput << " is not a valid entry.\n";
 		
 		//Check if user input is outside of 0 and 1000.
@@ -43,7 +38,7 @@ int main() {
 		} else {
 			//Loop through all possible divisors of user input.
 			for (i = 1, j = 0, isDivisible = 0, isPerfect = 0; userInt != i; i++) {
-				isDivisible = userInput % i; //Checking if user input is evenly divisible.
+				isDivisible = userInt % i; //Checking if user input is evenly divisible.
 				if (isDivisible == 0) {
 					isPerfect = isPerfect + i; //Checking if user input is perfect.
 					j++; //Counting number of times user input is evenly divisible.
