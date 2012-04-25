@@ -1,5 +1,5 @@
 //Lamog, Rob
-//FFFF, 2012 Lab #4A
+//Lab #4A
 //Section #0245 MW 9am-11am
 
 #include <iostream>
@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     
-    int userInt = 0;
+	int userInt = 0;
 	string strInput;
 	size_t found;
 	int isDivisible, isPerfect;
@@ -20,6 +20,8 @@ int main() {
 		cout << "Enter an integer from 1 to 1000 or \'0\' to quit: \n";
 		getline (cin, strInput);
 		//cout << strInput << endl;
+
+		if (strInput == "0") break;
 		
 		//Convert string to integer.
 		stringstream(strInput) >> userInt;
@@ -50,18 +52,23 @@ int main() {
 			//One is a unique number.
 			if (userInt == 1) cout << userInt << " is neither perfect or prime." << endl;
 			
-			//With only one even divisor number is prime.
+			//With only one even divisor, number is prime.
 			if (j == 1) cout << userInt << " is prime." << endl;
 			
 			//Number is perfect if even divisors add up to userInput.
 			if (userInt == isPerfect) {
 				cout << userInt << " is perfect." << endl;
-				cout << "Divisors include: ";
-				i = 1;
+				cout << "Divisors include:" << endl;
+				
+				//Initialize counters
+				i = 1; j = 0;
+				
 				while (userInt != i) {
 					isDivisible = userInt % i;
 					if (isDivisible == 0) {
-						cout << i << " ";
+						cout << "\t" << i;
+						j++;
+						if ((j % 6) == 0) cout << endl;
 					}
 					i++;
 				}
@@ -70,12 +77,17 @@ int main() {
 			//Number must not be prime.
 			} else if (j > 1) {
 				cout << userInt << " is not prime." << endl;
-				cout << "Divisors include: ";
-				i = 1;
+				cout << "Divisors include:" << endl;
+				
+				//Initialize counters
+				i = 1; j = 0;
+				
 				while (userInt != i) {
 					isDivisible = userInt % i;
 					if (isDivisible == 0) {
-						cout << i << " ";
+						cout << "\t" << i;
+						j++;
+						if ((j % 6) == 0) cout << endl;
 					}
 					i++;
 				}
