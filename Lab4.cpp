@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     
-    int userInt = 0;
+	int userInt = 0;
 	string strInput;
 	size_t found;
 	int isDivisible, isPerfect;
