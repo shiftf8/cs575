@@ -23,7 +23,7 @@ ifstream inData;
 ofstream outData, errorData;
 
 //Prototypes
-void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string& adults, string& children, string& meal, string& surcharge, string& deposit);
+void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit);
 void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool weekendSurcharge, float depositFloat);
 float calc_AdultStandardMeal(int adultsInt);
 float calc_ChildrenStandardMeal(int childrenInt);
@@ -88,7 +88,7 @@ int main() {
 	return 0;
 }
 
-void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string& adults, string& children, string& meal, string& surcharge, string& deposit) {
+void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit) {
 	errorData << adults << " " << children << " "  << meal << " "  << surcharge << " "  << deposit << " "  << endl;
 	if (error_A) errorData << "Invalid number of adults." << endl;
 	if (error_C) errorData << "Invalid number of children." << endl;
@@ -174,7 +174,7 @@ float calc_TipandTax(float mealSubTotal) {
 
 float calc_Surcharge(float totalMeals) {
 	float surchargeTotal;
-	surchargeTotal = totalMeals + (totalMeals * surcharge);
+	surchargeTotal = totalMeals * surcharge;
 	return(surchargeTotal);
 }
 
