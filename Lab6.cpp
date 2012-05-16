@@ -20,10 +20,10 @@ const float discountB = 0.025;
 const float discountC = 0.035;
 
 ifstream inData;
-ofstream outData;
+ofstream outData, errorData;
 
 //Prototypes
-void check_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D);
+void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string& adults, string& children, string& meal, string& surcharge, string& deposit);
 void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool weekendSurcharge, float depositFloat);
 float calc_AdultStandardMeal(int adultsInt);
 float calc_ChildrenStandardMeal(int childrenInt);
@@ -35,21 +35,22 @@ float calc_EarlyPaymentDiscount(float totalBill);
 
 int main() {
     string adults, children, meal, surcharge, deposit; //Data variables.
-	
+    
 	int adultsInt, childrenInt;
 	bool deluxeMeal = false, weekendSurcharge = false;
 	float depositFloat;
 
 	bool error_A = false, error_C = false, error_M = false, error_S = false, error_D = false; //Custom error flags.
 		
-	inData.open ("C:\\Users\\Owner\\Downloads\\data.txt");
+	inData.open("C:\\temp\\Lab 6\\data.txt");
 	//Checking for error with file.
 	if (!inData) {
 		cout << "Cannot open file, terminating program." << endl;
 		exit (1);
 	}
 
-	outData.open ("C:\\Users\\Owner\\Downloads\\newfile.txt");
+    outData.open("C:\\temp\\Lab 6\\newfile.txt");
+    errorData.open("C:\\temp\\Lab 6\\errorfile.txt");
 
 	while (inData >> adults >> children >> meal >> surcharge >> deposit) {
 	//while (cin >> adults >> children >> meal >> surcharge >> deposit) {
@@ -71,7 +72,7 @@ int main() {
 		if (depositFloat < 0.0) error_D = true;
 		
 		if (error_A || error_C || error_M || error_S || error_D) {
-			check_ErrorFlags(error_A, error_C, error_M, error_S, error_D);
+			custom_ErrorFlags(error_A, error_C, error_M, error_S, error_D, adults, children, meal, surcharge, deposit);
 			//Reset custom error flags before continuing.
 			error_A = false, error_C = false, error_M = false, error_S = false, error_D = false;
 		}
@@ -80,19 +81,21 @@ int main() {
 	}
 
 	inData.close();
-	outData.close ();
+    outData.close();
+    errorData.close();
 
 	system("pause");
 	return 0;
 }
 
-void check_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D) {
-	if (error_A) outData << "Invalid number of adults." << endl;
-	if (error_C) outData << "Invalid number of children." << endl;
-	if (error_M) outData << "Invalid meal selection." << endl;
-	if (error_S) outData << "Invalid surcharge entry." << endl;
-	if (error_D) outData << "Invalid deposit entry." << endl;
-	outData << endl;
+void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string& adults, string& children, string& meal, string& surcharge, string& deposit) {
+	errorData << adults << " " << children << " "  << meal << " "  << surcharge << " "  << deposit << " "  << endl;
+	if (error_A) errorData << "Invalid number of adults." << endl;
+	if (error_C) errorData << "Invalid number of children." << endl;
+	if (error_M) errorData << "Invalid meal selection." << endl;
+	if (error_S) errorData << "Invalid surcharge entry." << endl;
+	if (error_D) errorData << "Invalid deposit entry." << endl;
+	errorData << endl;
 }
 
 void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool weekendSurcharge, float depositFloat) {
