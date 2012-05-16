@@ -23,6 +23,8 @@ ifstream inData;
 ofstream outData, errorData;
 
 //Prototypes
+//void openFile();
+void billing(void);
 void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit);
 void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool weekendSurcharge, float depositFloat);
 float calc_AdultStandardMeal(int adultsInt);
@@ -34,14 +36,6 @@ float calc_Surcharge(float totalMeals);
 float calc_EarlyPaymentDiscount(float totalBill);
 
 int main() {
-    string adults, children, meal, surcharge, deposit; //Data variables.
-    
-	int adultsInt, childrenInt;
-	bool deluxeMeal = false, weekendSurcharge = false;
-	float depositFloat;
-
-	bool error_A = false, error_C = false, error_M = false, error_S = false, error_D = false; //Custom error flags.
-		
 	inData.open("C:\\temp\\Lab 6\\data.txt");
 	//Checking for error with file.
 	if (!inData) {
@@ -52,7 +46,36 @@ int main() {
     outData.open("C:\\temp\\Lab 6\\newfile.txt");
     errorData.open("C:\\temp\\Lab 6\\errorfile.txt");
 
-	while (inData >> adults >> children >> meal >> surcharge >> deposit) {
+    billing();
+
+	inData.close();
+    outData.close();
+    errorData.close();
+
+	system("pause");
+	return 0;
+}
+
+/*void openDataFile() {
+    inData.open ("data.txt");
+
+	//Checking for error with file.
+	if (!inData) {
+		cout << "Cannot open file, terminating program." << endl;
+		exit (1);
+	}
+}*/
+
+void billing() {
+    string adults, children, meal, surcharge, deposit; //Data string variables.
+    //Data input variables.
+    int adultsInt, childrenInt;
+    bool deluxeMeal = false, weekendSurcharge = false;
+	float depositFloat;
+
+	bool error_A = false, error_C = false, error_M = false, error_S = false, error_D = false; //Custom error flags.
+    
+    while (inData >> adults >> children >> meal >> surcharge >> deposit) {
 	//while (cin >> adults >> children >> meal >> surcharge >> deposit) {
 		stringstream(adults) >> adultsInt;
 		if (adultsInt < 0) error_A = true;
@@ -79,14 +102,7 @@ int main() {
 		else billing_Statement(adultsInt, childrenInt, deluxeMeal, weekendSurcharge, depositFloat);
 		//cout << adults << " " << children << " " << meal << " " << surcharge << " " << deposit << endl;
 	}
-
-	inData.close();
-    outData.close();
-    errorData.close();
-
-	system("pause");
-	return 0;
-}
+}		
 
 void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit) {
 	errorData << adults << " " << children << " "  << meal << " "  << surcharge << " "  << deposit << " "  << endl;
