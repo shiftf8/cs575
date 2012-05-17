@@ -56,13 +56,13 @@ void openDataFile() {
 	}
 
     //New files.
-    outData.open("C:\\temp\\Lab 6\\newfile.txt");
-    errorData.open("C:\\temp\\Lab 6\\errorfile.txt");
+    outData.open("C:\\temp\\Lab 6\\billingstatement.txt");
+    errorData.open("C:\\temp\\Lab 6\\billingerrorfile.txt");
 }
 
 void billing() {
     string adults, children, meal, surcharge, deposit; //Data string variables.
-    //Data input variables.
+    //Data converted variables.
     int adultsInt, childrenInt;
     bool deluxeMeal = false, weekendSurcharge = false;
 	float depositFloat;
