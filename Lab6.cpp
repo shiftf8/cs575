@@ -23,7 +23,7 @@ ifstream inData;
 ofstream outData, errorData;
 
 //Prototypes
-void openFile();
+void openFiles();
 void billing(void);
 void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit);
 void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool weekendSurcharge, float depositFloat);
@@ -45,7 +45,7 @@ int main() {
 	return 0;
 }
 
-void openDataFile() {
+void openFiles() {
     //Open data file.
     inData.open("C:\\temp\\Lab 6\\data.txt");
 
