@@ -138,7 +138,9 @@ void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool wee
 	if (weekendSurcharge) surchargeTotal = calc_Surcharge(totalMeals);
 	totalBill = mealSubTotal + tipAndTaxTotal + surchargeTotal;
 	balance = totalBill - depositFloat;
-	earlyPaymentDiscount = calc_EarlyPaymentDiscount(totalBill);
+    //Balance could be negative, which means no discount.
+	if (balance > 0.0) earlyPaymentDiscount = calc_EarlyPaymentDiscount(totalBill);
+	else earlyPaymentDiscount = 0.0;
 	
 	//cout.precision(2);
 	outData.precision(2);
@@ -150,7 +152,7 @@ void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool wee
 		<< "\t\t\tSurchage: \t$" << setw(8) << surchargeTotal << endl
 		<< "\t\t\tTotal Bill: \t$" << setw(8) << totalBill << endl << endl
 		<< "\tOutstanding Balance: $" << balance << endl
-		<< "Early payment Discount if paid within 10 days: $-" << earlyPaymentDiscount << endl << endl;
+		<< "Early payment Discount if paid within 10 days: $" << earlyPaymentDiscount << endl << endl;
 }
 
 float calc_AdultStandardMeal(int adultsInt) {	
@@ -192,9 +194,9 @@ float calc_Surcharge(float totalMeals) {
 float calc_EarlyPaymentDiscount(float totalBill) {
 	float earlyPaymentDiscount;
     if (totalBill > 0.0) {
-		if (totalBill < 100.0) earlyPaymentDiscount = totalBill * discountA;
-		if ((totalBill >= 100.0) && (totalBill < 400.0)) earlyPaymentDiscount = totalBill * discountB;
-		if (totalBill >= 400.0) earlyPaymentDiscount = totalBill * discountC;
+		if (totalBill < 100.0) earlyPaymentDiscount = -(totalBill * discountA);
+		if ((totalBill >= 100.0) && (totalBill < 400.0)) earlyPaymentDiscount = -(totalBill * discountB);
+		if (totalBill >= 400.0) earlyPaymentDiscount = -(totalBill * discountC);
 	}
 	return(earlyPaymentDiscount);
 }
