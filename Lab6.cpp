@@ -23,7 +23,7 @@ ifstream inData;
 ofstream outData, errorData;
 
 //Prototypes
-//void openFile();
+void openFile();
 void billing(void);
 void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit);
 void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool weekendSurcharge, float depositFloat);
@@ -34,37 +34,31 @@ float calc_ChildrenDeluxeMeal(int childrenInt);
 float calc_TipandTax(float mealSubTotal);
 float calc_Surcharge(float totalMeals);
 float calc_EarlyPaymentDiscount(float totalBill);
+void closeFiles(void);
 
 int main() {
-	inData.open("C:\\temp\\Lab 6\\data.txt");
-	//Checking for error with file.
-	if (!inData) {
-		cout << "Cannot open file, terminating program." << endl;
-		exit (1);
-	}
-
-    outData.open("C:\\temp\\Lab 6\\newfile.txt");
-    errorData.open("C:\\temp\\Lab 6\\errorfile.txt");
-
+    openFiles();
     billing();
-
-	inData.close();
-    outData.close();
-    errorData.close();
+	closeFiles();
 
 	system("pause");
 	return 0;
 }
 
-/*void openDataFile() {
-    inData.open ("data.txt");
+void openDataFile() {
+    //Open data file.
+    inData.open("C:\\temp\\Lab 6\\data.txt");
 
-	//Checking for error with file.
+	//Checking for error opening data file.
 	if (!inData) {
 		cout << "Cannot open file, terminating program." << endl;
 		exit (1);
 	}
-}*/
+
+    //New files.
+    outData.open("C:\\temp\\Lab 6\\newfile.txt");
+    errorData.open("C:\\temp\\Lab 6\\errorfile.txt");
+}
 
 void billing() {
     string adults, children, meal, surcharge, deposit; //Data string variables.
@@ -105,7 +99,7 @@ void billing() {
 }		
 
 void custom_ErrorFlags(bool error_A, bool error_C, bool error_M, bool error_S, bool error_D, string adults, string children, string meal, string surcharge, string deposit) {
-	errorData << adults << " " << children << " "  << meal << " "  << surcharge << " "  << deposit << " "  << endl;
+    errorData << "Adults: " << adults << " Children: " << children << " Meal: "  << meal << " Surcharge: "  << surcharge << " Deposit: $"  << deposit << " "  << endl;
 	if (error_A) errorData << "Invalid number of adults." << endl;
 	if (error_C) errorData << "Invalid number of children." << endl;
 	if (error_M) errorData << "Invalid meal selection." << endl;
@@ -140,6 +134,7 @@ void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool wee
 
 	tipAndTaxTotal = calc_TipandTax(mealSubTotal);
 	totalMeals = mealSubTotal + tipAndTaxTotal;
+    //Only calculate surcharge if necessary.
 	if (weekendSurcharge) surchargeTotal = calc_Surcharge(totalMeals);
 	totalBill = mealSubTotal + tipAndTaxTotal + surchargeTotal;
 	balance = totalBill - depositFloat;
@@ -150,7 +145,7 @@ void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool wee
 	outData << fixed << "# of Adults: \t" << setw(4) << adultsInt << "\tCost: \t\t$" << setw(8) << adultMealTotal << endl
 		<< "# of Children: \t" << setw(4) << childrenInt << "\tCost: \t\t$" << setw(8) << childrenMealTotal << endl
 		<< "\t\t\tSubtotal: \t$" << setw(8) << mealSubTotal << endl
-		<< "\t\t\tDeposit: \t$" << setw(8) << depositFloat << endl
+        << "\t\t\tDeposit: \t$" << setw(8) << depositFloat << endl
 		<< "\t\t\tTip and Tax: \t$" << setw(8) << tipAndTaxTotal << endl
 		<< "\t\t\tSurchage: \t$" << setw(8) << surchargeTotal << endl
 		<< "\t\t\tTotal Bill: \t$" << setw(8) << totalBill << endl << endl
@@ -196,8 +191,16 @@ float calc_Surcharge(float totalMeals) {
 
 float calc_EarlyPaymentDiscount(float totalBill) {
 	float earlyPaymentDiscount;
-	if (totalBill < 100.0) earlyPaymentDiscount = totalBill * discountA;
-	if ((totalBill >= 100.0) && (totalBill < 400.0)) earlyPaymentDiscount = totalBill * discountB;
-	if (totalBill >= 400.0) earlyPaymentDiscount = totalBill * discountC;
+    if (totalBill > 0.0) {
+		if (totalBill < 100.0) earlyPaymentDiscount = totalBill * discountA;
+		if ((totalBill >= 100.0) && (totalBill < 400.0)) earlyPaymentDiscount = totalBill * discountB;
+		if (totalBill >= 400.0) earlyPaymentDiscount = totalBill * discountC;
+	}
 	return(earlyPaymentDiscount);
+}
+
+void closeFiles() {
+	inData.close();
+	outData.close();
+	errorData.close();
 }
