@@ -39,7 +39,7 @@ void closeFiles(void);
 int main() {
     openFiles();
     billing();
-	closeFiles();
+    closeFiles();
 
 	system("pause");
 	return 0;
@@ -47,7 +47,7 @@ int main() {
 
 void openFiles() {
     //Open data file.
-    inData.open("C:\\temp\\Lab 6\\data.txt");
+    inData.open("C:\\temp\\Lab6\\data.txt");
 
 	//Checking for error opening data file.
 	if (!inData) {
@@ -56,8 +56,8 @@ void openFiles() {
 	}
 
     //New files.
-    outData.open("C:\\temp\\Lab 6\\billingstatement.txt");
-    errorData.open("C:\\temp\\Lab 6\\billingerrorfile.txt");
+    outData.open("C:\\temp\\Lab6\\billingstatement.txt");
+    errorData.open("C:\\temp\\Lab6\\billingerrorfile.txt");
 }
 
 void billing() {
@@ -147,46 +147,46 @@ void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool wee
 	outData << fixed << "# of Adults: \t" << setw(4) << adultsInt << "\tCost: \t\t$" << setw(8) << adultMealTotal << endl
 		<< "# of Children: \t" << setw(4) << childrenInt << "\tCost: \t\t$" << setw(8) << childrenMealTotal << endl
 		<< "\t\t\tSubtotal: \t$" << setw(8) << mealSubTotal << endl
-        << "\t\t\tDeposit: \t$" << setw(8) << depositFloat << endl
 		<< "\t\t\tTip and Tax: \t$" << setw(8) << tipAndTaxTotal << endl
 		<< "\t\t\tSurchage: \t$" << setw(8) << surchargeTotal << endl
-		<< "\t\t\tTotal Bill: \t$" << setw(8) << totalBill << endl << endl
+		<< "\t\t\tTotal Bill: \t$" << setw(8) << totalBill << endl
+        << "\t\t\tDeposit: \t$" << setw(8) << -(depositFloat) << endl << endl
 		<< "\tOutstanding Balance: $" << balance << endl
 		<< "Early payment Discount if paid within 10 days: $" << earlyPaymentDiscount << endl << endl;
 }
 
 float calc_AdultStandardMeal(int adultsInt) {	
-	float adultMealTotal;
+	float adultMealTotal = 0.0;
 	adultMealTotal = adultsInt * adultStandard;
 	return(adultMealTotal);
 }
 
 float calc_ChildrenStandardMeal(int childrenInt) {	
-	float childrenMealTotal;
-	childrenMealTotal = (childrenInt * adultStandard) / childDiscount;
+	float childrenMealTotal = 0.0;
+	childrenMealTotal = (childrenInt * adultStandard) * childDiscount;
 	return(childrenMealTotal);
 }
 
 float calc_AdultDeluxeMeal(int adultsInt) {
-	float adultMealTotal;
+	float adultMealTotal = 0.0;
 	adultMealTotal = adultsInt * adultDeluxe;
 	return(adultMealTotal);
 }
 
 float calc_ChildrenDeluxeMeal(int childrenInt) {
-	float childrenMealTotal;
-	childrenMealTotal = (childrenInt * adultDeluxe) / childDiscount;
+	float childrenMealTotal = 0.0;
+	childrenMealTotal = (childrenInt * adultDeluxe) * childDiscount;
 	return(childrenMealTotal);
 }
 
 float calc_TipandTax(float mealSubTotal) {	
-	float tipAndTaxTotal;
+	float tipAndTaxTotal = 0.0;
 	tipAndTaxTotal = mealSubTotal * tipAndTax;
 	return(tipAndTaxTotal);
 }
 
 float calc_Surcharge(float totalMeals) {
-	float surchargeTotal;
+	float surchargeTotal = 0.0;
 	surchargeTotal = totalMeals * surcharge;
 	return(surchargeTotal);
 }
