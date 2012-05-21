@@ -23,7 +23,7 @@ void closeFiles(void);
 
 int main() {
     openFiles();
-	arraySort();
+    arraySort();
 	closeFiles();
 	
 	system("pause");
@@ -32,7 +32,7 @@ int main() {
 
 void openFiles() {
 	//Open data file.
-	inData.open ("C:\\temp\\Lab 7\\data.txt");
+	inData.open ("C:\\temp\\Lab7\\data.txt");
 
 	//Checking for error opening data file.
 	if (!inData) {
@@ -41,7 +41,7 @@ void openFiles() {
 	}
 
 	//New files.
-	outData.open("C:\\temp\\Lab 7\\output.txt");
+	outData.open("C:\\temp\\Lab7\\output.txt");
 }
 
 void arraySort() {
@@ -66,7 +66,7 @@ void arraySort() {
 	
 	//cout << odds[4];
 	calcOut(evens, i);
-	cout << endl << endl;
+	//cout << endl << endl;
     outData << endl << endl;
 	calcOut(odds, j);
 }
@@ -76,7 +76,7 @@ void calcOut(int arr[], int x) {
 	int high = 0, low = 1000;
 	int i; //counter
 	
-    cout << "Array [ ";
+    //cout << "Array [ ";
     outData << "Array [ ";
 	for (i = 0; i < x; i++) {
 		total = total + arr[i];
@@ -85,14 +85,14 @@ void calcOut(int arr[], int x) {
 		//cout << high << " ";
 		if (arr[i] < low) low = arr[i];
 		//cout << low << " ";
-    	cout << arr[i] << " ";
+    	//cout << arr[i] << " ";
     	outData << arr[i] << " ";
 	}
-    cout << "]" << endl;
+    //cout << "]" << endl;
     outData << "]" << endl;
 	
 	average = total / x;
-    cout << "Average = " << average << "\tHigh = "<< high << "\tLow = " << low << endl;
+    //cout << "Average = " << average << "\tHigh = "<< high << "\tLow = " << low << endl;
     outData << "Average = " << average << "\tHigh = "<< high << "\tLow = " << low << endl;
 	calcOutHigherThanAve(arr, x, average);	
 }
@@ -100,15 +100,16 @@ void calcOut(int arr[], int x) {
 void calcOutHigherThanAve(int arr[], int x, float average) {
 	int j; //counter
 	
-    cout << "Numbers higher than average [ ";
+    //cout << "Numbers higher than average [ ";
     outData << "Numbers higher than average [ ";
 	for (j = 0; j < x; j++) {
 		if (arr[j] > average) {
-            cout << arr[j] << " ";
+            //cout << arr[j] << " ";
             outData << arr[j] << " ";
+		}
 	}
-    cout << "]";
-    outData << "]";
+	//cout << "]";
+	outData << "]";
 }
 
 void closeFiles() {
