@@ -156,37 +156,37 @@ void billing_Statement(int adultsInt, int childrenInt, bool deluxeMeal, bool wee
 }
 
 float calc_AdultStandardMeal(int adultsInt) {	
-	float adultMealTotal = 0.0;
+	float adultMealTotal;
 	adultMealTotal = adultsInt * adultStandard;
 	return(adultMealTotal);
 }
 
 float calc_ChildrenStandardMeal(int childrenInt) {	
-	float childrenMealTotal = 0.0;
+	float childrenMealTotal;
 	childrenMealTotal = (childrenInt * adultStandard) * childDiscount;
 	return(childrenMealTotal);
 }
 
 float calc_AdultDeluxeMeal(int adultsInt) {
-	float adultMealTotal = 0.0;
+	float adultMealTotal;
 	adultMealTotal = adultsInt * adultDeluxe;
 	return(adultMealTotal);
 }
 
 float calc_ChildrenDeluxeMeal(int childrenInt) {
-	float childrenMealTotal = 0.0;
+	float childrenMealTotal;
 	childrenMealTotal = (childrenInt * adultDeluxe) * childDiscount;
 	return(childrenMealTotal);
 }
 
 float calc_TipandTax(float mealSubTotal) {	
-	float tipAndTaxTotal = 0.0;
+	float tipAndTaxTotal;
 	tipAndTaxTotal = mealSubTotal * tipAndTax;
 	return(tipAndTaxTotal);
 }
 
 float calc_Surcharge(float totalMeals) {
-	float surchargeTotal = 0.0;
+	float surchargeTotal;
 	surchargeTotal = totalMeals * surcharge;
 	return(surchargeTotal);
 }
