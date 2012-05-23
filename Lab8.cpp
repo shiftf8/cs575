@@ -137,11 +137,11 @@ void dataManipA() {
 	}*/
 	
 	//Temp Arrays explicitly initialized.
-	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC"};
-	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00};
-	int arrMem[] = {5, 8, 2, 4};
+	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC", "DATA", "EEEE", "FADE", "GATE", "HILO"};
+	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00, 8000.00, 36000.00, 8500.00, 25000.00, 3000.00};
+	int arrMem[] = {5, 8, 2, 4, 3, 5, 4, 1, 1};
 
-	int i, x = 4; //Counters
+	int i, x = 9; //Counters
 		
 	cout << "Option A: ALL Households, Income, and # of Members in Household." << endl
 		<< "Household ID" << "\tHousehold Income" << "\t# of Members" << endl;
@@ -175,14 +175,15 @@ void dataManipB() {
 	}*/
 	
 	//Temp Arrays explicitly initialized.
-	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC"};
-	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00};
-	int arrMem[] = {5, 8, 2, 4};
+	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC", "DATA", "EEEE", "FADE", "GATE", "HILO"};
+	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00, 8000.00, 36000.00, 8500.00, 25000.00, 3000.00};
+	int arrMem[] = {5, 8, 2, 4, 3, 5, 4, 1, 1};
 		
 	double mean;
-	int i, x = 4; //Counters
+	int i, x = 9; //Counters
 	
 	mean = findMean(arrHIn, x);
+	//cout << mean << endl;
 
 	cout << "Option B: Households Above Average Income" << endl
 		<< "Household ID" << "\tHousehold Income" << endl;
@@ -230,14 +231,14 @@ void dataManipC() {
 	}*/
 	
 	//Temp Arrays explicitly initialized.
-	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC"};
-	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00};
-	int arrMem[] = {5, 8, 2, 4};
+	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC", "DATA", "EEEE", "FADE", "GATE", "HILO"};
+	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00, 8000.00, 36000.00, 8500.00, 25000.00, 3000.00};
+	int arrMem[] = {5, 8, 2, 4, 3, 5, 4, 1, 1};
 
 	float P; //Poverty level.
 	float percent; //Percent of households below poverty level.
 	float j = 0.0; //Count of households below poverty level.
-	int i, x = 4; //Counters
+	int i, x = 9; //Counters
 	
 	cout << "Option C: Percentage of households below poverty level." << endl;
 	for (i = 0, j = 0; i < x; i++) {
@@ -274,18 +275,18 @@ void dataManipD() {
 	}*/
 	
 	//Temp Arrays explicitly initialized.
-	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC"};
-	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00};
-	int arrMem[] = {5, 8, 2, 4};
+	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC", "DATA", "EEEE", "FADE", "GATE", "HILO"};
+	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00, 8000.00, 36000.00, 8500.00, 25000.00, 3000.00};
+	int arrMem[] = {5, 8, 2, 4, 3, 5, 4, 1, 1};
 	
 	string tempString;
 	double tempDouble;
 	int tempInt;
-	int i, flag = 1, x = 4;
+	int i, flag = 1, x = 9;
 	int d = x;
 	
 	cout << "Option D: Data sorted by household income." << endl
-		<< "Household ID" << "\tHousehold Income" << "\t# of Members in Household" << endl;
+		<< "Household ID" << "\tHousehold Income" << "\t# of Members" << endl;
 	//Shell sort.
 	while(flag || (d > 1)) {
 		flag = 0;
@@ -340,14 +341,14 @@ void dataManipE() {
 	}*/
 	
 	//Temp Arrays explicitly initialized.
-	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC"};
-	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00};
-	int arrMem[] = {5, 8, 2, 4};
+	string arrHId[] = {"WHVC", "AAAA", "BURB", "CCCC", "DATA", "EEEE", "FADE", "GATE", "HILO"};
+	double arrHIn[] = {34000.00, 10500.00, 23500.00, 150000.00, 8000.00, 36000.00, 8500.00, 25000.00, 3000.00};
+	int arrMem[] = {5, 8, 2, 4, 3, 5, 4, 1, 1};
 
 	string tempString;
 	double tempDouble, average;
 	int tempInt;
-	int i, flag = 1, x = 4;
+	int i, flag = 1, x = 8;
 	int d = x;
 	
 	cout << "Option E: Median household income." << endl;
@@ -385,7 +386,7 @@ void dataManipE() {
 	}
 	
 	cout.precision(2);
-	cout << fixed << average << " is the median household income." << endl;
+	cout << fixed << average << " is the median household income." << endl << endl;
 }
 
 void closeFiles() {
