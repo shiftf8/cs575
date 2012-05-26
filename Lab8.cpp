@@ -20,7 +20,7 @@ struct houseData {
 
 void openFiles(void);
 void menuQuery(void); //Menu app.
-void displayMenu(void); //Display menu options.
+void displayMenu(void); //Output menu options.
 void selOutput(int selectedOption, int i); //User selection output.
 int grabData(void); //Returning count of struct household array.
 void dataManipA(int i); //Output list of all household data.
@@ -65,10 +65,10 @@ int grabData() {
 		//Put House Data into struct houseData array.
 		household[i].id = houseID;
 		//cout << i << " " << household[i].id << " " << houseID << " ";
-		//Convert houseIncome to double.
+		//Convert houseIncome to double and put into houseData array.
 		stringstream(houseIncome) >> household[i].income;
 		//cout << household[i].income << " " << houseIncome << " ";
-		//Convert iMembers to int.
+		//Convert iMembers to int and put into houseData array.
 		stringstream(iMembers) >> household[i].members;
 		//cout << household[i].members << " " << iMembers << endl;
 		i++;
