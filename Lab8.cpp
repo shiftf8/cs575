@@ -14,14 +14,14 @@ using namespace std;
 
 struct houseData {
     string id; //Household ID
-	double income; //Household Income
+    double income; //Household Income
 	int members; //# of Members in Household
 } household[l];
 
 void openFiles(void);
 void menuQuery(void); //Menu app.
 void displayMenu(void); //Display menu options.
-void selOutput(int selectedOption); //User selection output.
+void selOutput(int selectedOption, int i); //User selection output.
 int grabData(void); //Returning count of struct household array.
 void dataManipA(int i); //Output list of all household data.
 void dataManipB(int i); //Output list of household income above average.
@@ -35,11 +35,11 @@ ifstream inData;
 ofstream outData;
 
 int main() {
-	//openFiles();
+	openFiles();
 	menuQuery();
-	//closeFiles();
+	closeFiles();
 	
-	//system("pause");
+	system("pause");
 	return 0;
 }
 
@@ -49,8 +49,8 @@ void openFiles() {
 	//Checking for error opening data file.
 	if (!inData) {
 		cout << "Cannot open file. Terminating program." << endl;
-		//system("pause");
-		//exit (1);
+		system("pause");
+		exit (1);
 	}
 	
 	//Open new files.
@@ -59,9 +59,9 @@ void openFiles() {
 
 int grabData() {
 	string houseID, houseIncome, iMembers;
-	int i = 9; //Counter
+	int i = 0; //Counter
 
-/*	while (cin >> houseID >> houseIncome >> iMembers) {
+	while (inData >> houseID >> houseIncome >> iMembers) {
 		//Put House Data into struct houseData array.
 		household[i].id = houseID;
 		//cout << i << " " << household[i].id << " " << houseID << " ";
@@ -72,9 +72,9 @@ int grabData() {
 		stringstream(iMembers) >> household[i].members;
 		//cout << household[i].members << " " << iMembers << endl;
 		i++;
-	}*/
+	}
 	
-	//Temp explicit array initialization.
+/*	//Temp explicit array initialization.
 	household[0].id = "WHVC";
 	household[1].id = "AAAA";
 	household[2].id = "BURB";
@@ -103,7 +103,7 @@ int grabData() {
 	household[5].members = 5;
 	household[6].members = 4;
 	household[7].members = 1;
-	household[8].members = 1;
+	household[8].members = 1;*/
 
 	//cout << household[0].id << " " << household[0].income << " " << household[0].members << endl;
 	
@@ -113,6 +113,10 @@ int grabData() {
 void menuQuery() {
 	string str;
 	int selectedOption;
+	int i; //Total of entries in data struct houseData household[]
+	
+	//Grabbing data entries from file. Put total count in i.
+	i = grabData();
 	
 	while (str != "Exit") {
 		//Initialize valid input flag and options.
@@ -149,7 +153,7 @@ void menuQuery() {
 		}
 		
 		if (!inputValid) cout << "You have made an invalid entry. Please enter a proper selection." << endl;
-		else selOutput(selectedOption);
+		else selOutput(selectedOption, i);
 			//cout << selectedOption << endl;
 	}
 }
@@ -158,19 +162,14 @@ void displayMenu() {
 //	cout << "Menu" << endl; //Temp menu
 	cout << "Please make a selection from the following menu options:" << endl
 		<< "(A) Display all input data formatted with columns and column headers." << endl
-		<< "(B) Display list of households with income greater than average household income." << endl
+		<< "(B) Display households with income greater than average household income." << endl
 		<< "(C) Display percentage of households below poverty level." << endl
 		<< "(D) Display all input data sorted by household income." << endl
 		<< "(E) Display the median household income." << endl
-		<< "Type a letter corresponding to your selection or type 'Exit' to quit, then press enter." << endl << endl;
+		<< "Type a letter corresponding to your selection or type 'Exit' to quit, then press enter." << endl;
 }
 
-void selOutput(int selectedOption) {
-	int i; //Total of entries in data struct houseData household[]
-	
-	//Grabbing data entries from file. Put total count in i.
-	i = grabData();
-
+void selOutput(int selectedOption, int i) {
 	if (selectedOption == 1) dataManipA(i);
 	if (selectedOption == 2) dataManipB(i);
 	if (selectedOption == 3) dataManipC(i);
