@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     
-	int userInt = 0;
+    int userInt = 0;
 	string strInput;
 	size_t found;
 	int isDivisible, isPerfect;
@@ -28,9 +28,9 @@ int main() {
 		//cout << userInt << endl;
 		
 		//Search string input for decimal/period.
-		found=strInput.find('.');
+		found = strInput.find('.');
 		
-		if (found!=string::npos) {
+		if (found != string::npos) {
 			cout << strInput << " is not a valid entry.\n";
 		
 		//Check if user input is outside of 0 and 1000.
@@ -57,8 +57,8 @@ int main() {
 			
 			//Number is perfect if even divisors add up to userInput.
 			if (userInt == isPerfect) {
-				cout << userInt << " is perfect." << endl;
-				cout << "Divisors include:" << endl;
+				cout << userInt << " is perfect." << endl
+					<< "Divisors include:" << endl;
 				
 				//Initialize counters
 				i = 1; j = 0;
@@ -76,8 +76,8 @@ int main() {
 			
 			//Number must not be prime.
 			} else if (j > 1) {
-				cout << userInt << " is not prime." << endl;
-				cout << "Divisors include:" << endl;
+				cout << userInt << " is not prime." << endl
+					<< "Divisors include:" << endl;
 				
 				//Initialize counters
 				i = 1; j = 0;

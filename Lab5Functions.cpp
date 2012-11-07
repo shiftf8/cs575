@@ -2,6 +2,7 @@
 //Lab #5A
 //Section #0245 MW 9am-11am
 
+#include <climits>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -9,28 +10,13 @@
 
 using namespace std;
 
-int findmax(int& theuserInt, int& themax) {
-    if (theuserInt > themax) themax = theuserInt;
-	return(themax);
-}
-
-int findmin(int& theuserInt, int& themin) {
-	if (theuserInt < themin) themin = theuserInt;
-	return(themin);
-}
-
-int findtotal(int& theuserInt, int& thetotal) {
-	thetotal = thetotal + theuserInt;
-	return(thetotal);
-}
-
-float findaverage(float& theaverage, int& thetotal) {
-	theaverage = thetotal / 7.0;
-	return(theaverage);
-}
+int findmax(int& theuserInt, int& themax);
+int findmin(int& theuserInt, int& themin);
+int findtotal(int& theuserInt, int& thetotal);
+float findaverage(float& theaverage, int& thetotal);
 
 int main() {
-	
+    
 	ifstream inData;
 	ofstream outData;
 	string strInput;
@@ -48,7 +34,7 @@ int main() {
 	
 	outData.open ("newfile.txt");
 */	
-	for (max = 0, min = 1000, total = 0, i = 0, j = 0; i < 7; i++) {
+	for (max = INT_MIN, min = INT_MAX, total = 0, i = 0, j = 0; i < 7; i++) {
 		//while (inData >> strInput) {
 		while (cin >> strInput) {
 			//cout << strInput << " ";
@@ -81,8 +67,8 @@ int main() {
 				cout << endl << "Max: " << max << "\tMin: " << min << "\tTotal: " << total << "\tAverage: " << average << endl;
 				//outData << endl << "Max: " << max << "\tMin: " << min << "\tTotal: " << total << "\tAverage: " << average << endl;
 				average = 0;
-				max = 0;
-				min = 1000;
+				max = INT_MIN;
+				min = INT_MAX;
 				total = 0;
 			}
 		}
@@ -93,4 +79,24 @@ int main() {
 */
 	//system("pause");
 	return 0;
+}
+
+int findmax(int& theuserInt, int& themax) {
+	if (theuserInt > themax) themax = theuserInt;
+	return(themax);
+}
+
+int findmin(int& theuserInt, int& themin) {
+	if (theuserInt < themin) themin = theuserInt;
+	return(themin);
+}
+
+int findtotal(int& theuserInt, int& thetotal) {
+	thetotal = thetotal + theuserInt;
+	return(thetotal);
+}
+
+float findaverage(float& theaverage, int& thetotal) {
+	theaverage = thetotal / 7.0;
+	return(theaverage);
 }

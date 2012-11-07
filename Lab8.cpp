@@ -14,32 +14,32 @@ using namespace std;
 
 struct houseData {
     string id; //Household ID
-    double income; //Household Income
+	double income; //Household Income
 	int members; //# of Members in Household
 } household[l];
 
 void openFiles(void);
 void menuQuery(void); //Menu app.
-void displayMenu(void); //Output menu options.
-void selOutput(int selectedOption, int i); //User selection output.
+void displayMenu(void); //Display menu options.
+void selectionOutput(string str); //User selection output.
 int grabData(void); //Returning count of struct household array.
-void dataManipA(int i); //Output list of all household data.
-void dataManipB(int i); //Output list of household income above average.
+void allHouseholdData(int i); //Output list of all household data.
+void householdIncomeAboveAve(int i); //Output list of household income above average.
 double findMean(houseData household[], int i); //Returning average household income.
-void dataManipC(int i); //Output percentage of households below poverty level.
-void dataManipD(int i); //Output sorted list of households by income.
-void dataManipE(int i); //Output median household income.
+void percentBelowPovertyLevel(int i); //Output percentage of households below poverty level.
+void sortByIncome(int i); //Output sorted list of households by income.
+void medianHouseholdIncome(int i); //Output median household income.
 void closeFiles(void);
 
 ifstream inData;
 ofstream outData;
 
 int main() {
-	openFiles();
+	//openFiles();
 	menuQuery();
-	closeFiles();
+	//closeFiles();
 	
-	system("pause");
+	//system("pause");
 	return 0;
 }
 
@@ -49,8 +49,8 @@ void openFiles() {
 	//Checking for error opening data file.
 	if (!inData) {
 		cout << "Cannot open file. Terminating program." << endl;
-		system("pause");
-		exit (1);
+		//system("pause");
+		//exit (1);
 	}
 	
 	//Open new files.
@@ -59,22 +59,27 @@ void openFiles() {
 
 int grabData() {
 	string houseID, houseIncome, iMembers;
-	int i = 0; //Counter
+/*	int i = 0; //Counter
 
 	while (inData >> houseID >> houseIncome >> iMembers) {
 		//Put House Data into struct houseData array.
 		household[i].id = houseID;
 		//cout << i << " " << household[i].id << " " << houseID << " ";
-		//Convert houseIncome to double and put into houseData array.
+
+		//Convert houseIncome to double.
 		stringstream(houseIncome) >> household[i].income;
 		//cout << household[i].income << " " << houseIncome << " ";
-		//Convert iMembers to int and put into houseData array.
+
+		//Convert iMembers to int.
 		stringstream(iMembers) >> household[i].members;
 		//cout << household[i].members << " " << iMembers << endl;
+
 		i++;
-	}
+	}*/
 	
-/*	//Temp explicit array initialization.
+	//Temp explicit array initialization.
+	int i = 9; //Adjusting array length to test menu options.
+	
 	household[0].id = "WHVC";
 	household[1].id = "AAAA";
 	household[2].id = "BURB";
@@ -103,7 +108,7 @@ int grabData() {
 	household[5].members = 5;
 	household[6].members = 4;
 	household[7].members = 1;
-	household[8].members = 1;*/
+	household[8].members = 1;
 
 	//cout << household[0].id << " " << household[0].income << " " << household[0].members << endl;
 	
@@ -112,96 +117,75 @@ int grabData() {
 
 void menuQuery() {
 	string str;
-	int selectedOption;
-	int i; //Total of entries in data struct houseData household[]
-	
-	//Grabbing data entries from file. Put total count in i.
-	i = grabData();
 	
 	while (str != "Exit") {
-		//Initialize valid input flag and options.
-		bool inputValid = false;
-		selectedOption = 0;
-
 		displayMenu();
 		cin >> str;
 		if (str == "Exit") {
-			cout << "Exiting app. Have a great day." << endl;
+			cout << "Exiting menu. Have a great day." << endl;
 			break;
 		}
-		//Checking input and flagging for valid input.
-		if ((str == "a") || (str == "A")) {
-			//cout << str << endl;
-			selectedOption = 1;
-			inputValid = true;
-		}
-		if ((str == "b") || (str == "B")) {
-			selectedOption = 2;
-			inputValid = true;
-		}
-		if ((str == "c") || (str == "C")) {
-			selectedOption = 3;
-			inputValid = true;
-		}
-		if ((str == "d") || (str == "D")) {
-			selectedOption = 4;
-			inputValid = true;
-		}
-		if ((str == "e") || (str == "E")) {
-			selectedOption = 5;
-			inputValid = true;
-		}
 		
-		if (!inputValid) cout << "You have made an invalid entry. Please enter a proper selection." << endl;
-		else selOutput(selectedOption, i);
-			//cout << selectedOption << endl;
+		//Initialize valid input flag and options.
+		bool isInputValid = false;
+		
+		//Checking input and flagging for valid input.
+		if (str == "1") isInputValid = true;
+		if (str == "2") isInputValid = true;
+		if (str == "3") isInputValid = true;
+		if (str == "4") isInputValid = true;
+		if (str == "5") isInputValid = true;
+		
+		if (!isInputValid) cout << "You have made an invalid entry. Please enter a proper selection." << endl << endl;
+		else selectionOutput(str);
 	}
 }
 
 void displayMenu() {
-//	cout << "Menu" << endl; //Temp menu
+/*	cout << "Menu" << endl; //Temp menu*/
 	cout << "Please make a selection from the following menu options:" << endl
-		<< "(A) Display all input data formatted with columns and column headers." << endl
-		<< "(B) Display households with income greater than average household income." << endl
-		<< "(C) Display percentage of households below poverty level." << endl
-		<< "(D) Display all input data sorted by household income." << endl
-		<< "(E) Display the median household income." << endl
-		<< "Type a letter corresponding to your selection or type 'Exit' to quit, then press enter." << endl;
+		<< "1) Display all input data formatted with columns and column headers." << endl
+		<< "2) Display list of households with income greater than average household income." << endl
+		<< "3) Display percentage of households below poverty level." << endl
+		<< "4) Display all input data sorted by household income." << endl
+		<< "5) Display the median household income." << endl
+		<< "Enter a number corresponding to your selection or enter 'Exit' to quit." << endl;
 }
 
-void selOutput(int selectedOption, int i) {
-	if (selectedOption == 1) dataManipA(i);
-	if (selectedOption == 2) dataManipB(i);
-	if (selectedOption == 3) dataManipC(i);
-	if (selectedOption == 4) dataManipD(i);
-	if (selectedOption == 5) dataManipE(i);
-}
-
-void dataManipA(int i) {
-	int j; //Counter
+void selectionOutput(string str) {
+	int totalEntries; //Total of entries in data struct houseData household[]
 	
-	cout << "Option A: ALL Households, Income, and # of Members in Household." << endl
+	//Grabbing data entries from file. Put total count in i.
+	totalEntries = grabData();
+
+	if (str == "1") allHouseholdData(totalEntries);
+	if (str == "2") householdIncomeAboveAve(totalEntries);
+	if (str == "3") percentBelowPovertyLevel(totalEntries);
+	if (str == "4") sortByIncome(totalEntries);
+	if (str == "5") medianHouseholdIncome(totalEntries);
+}
+
+void allHouseholdData(int i) {
+	cout << "ALL Households, Income, and # of Members in Household." << endl
 		<< "Household ID" << "\tHousehold Income" << "\t# of Members" << endl;
-	
-	for (j = 0; j < i; j++) {
+	for (int j = 0; j < i; j++) {
 		cout.precision(2);
 		cout << fixed << setw(12) << left << household[j].id << "\t$" << setw(15) << right << household[j].income << "\t" << left << household[j].members << endl;
 	}
 	cout << endl;
 }
 
-void dataManipB(int i) {
+void householdIncomeAboveAve(int i) {
 	double mean; //Average household income.
-	int j; //Counter
 	
 	mean = findMean(household, i);
 	//cout << mean << endl;
 	
 	cout.precision(2);
-	cout << fixed << "Option B: Households Above Average Income" << endl
+	cout << fixed << "Households Above Average Income" << endl
 		<< "Average Household Income: $" << mean << endl
 		<< "Household ID" << "\tHousehold Income" << endl;	
-	for (j = 0; j < i; j++) {
+	for (int j = 0; j < i; j++) {
 		if (household[j].income > mean) {
 			cout << setw(12) << left << household[j].id << "\t$" << setw(15) << right << household[j].income << endl;
 		}
@@ -210,8 +194,8 @@ void dataManipB(int i) {
 }
 
 double findMean(houseData household[], int i) {
+	int j;
 	double average, total = 0.0;
-	int j; //Counter
 	
 	for (j = 0; j < i; j++) {
 		total = total + household[j].income;
@@ -221,40 +205,39 @@ double findMean(houseData household[], int i) {
 	return(average);
 }
 
-void dataManipC(int i) {
+void percentBelowPovertyLevel(int i) {
 	float P; //Poverty level.
-	float x; //Counter, forcing float data type.
+	float x = 0.0; //Counter, forcing float data type.
 	double percent; //Percent of households below poverty level.
-	int j; //Counter
-	
-	cout << "Option C: Percentage of households below poverty level." << endl;
-	for (j = 0, x = 0; j < i; j++) {
+
+	for (int j = 0; j < i; j++) {
 		P = 8000.00 + (500.00 * (household[j].members - 2));
 		if (household[j].income < P) {
 			x++;
 			//cout << "Poverty Level: " << P << "\tIncome: " << household[j].income << endl;
 		}
 	}
-	//cout << x << " " << j << endl;
-	percent = (x / j) * 100;
+
+	percent = (x / i) * 100;
+	
 	cout.precision(2);
 	cout << fixed << percent << "% of households are below poverty level." << endl << endl;
 }
 
-void dataManipD(int i) {
+void sortByIncome(int i) {
 	//Temp storage for swapping.
 	string tempString;
 	double tempDouble;
 	int tempInt;
-	int d = i;
+	int d = i; //Comparison counter to total entries.
 	int j, flag = 1; //Counter and flag to confirm swap.
 	
-	cout << "Option D: Data sorted by household income." << endl
+	cout << "Data sorted by household income." << endl
 		<< "Household ID" << "\tHousehold Income" << "\t# of Members" << endl;
 	//Shell sort.
 	while(flag || (d > 1)) {
 		flag = 0;
-		d = (d+1) / 2;
+		d = (d + 1) / 2;
 		for (j = 0; j < (i - d); j++) {
 			if (household[j + d].income > household[j].income) {
 				//Swap Household Income Array
@@ -274,7 +257,6 @@ void dataManipD(int i) {
 			}
 		}
 	}
-	
 	for (j = 0; j < i; j++) {
 		cout.precision(2);
 		cout << fixed << setw(12) << left << household[j].id << "\t$" << setw(15) << right << household[j].income << "\t" << left << household[j].members << endl;
@@ -282,7 +264,7 @@ void dataManipD(int i) {
 	cout << endl;
 }
 
-void dataManipE(int i) {
+void medianHouseholdIncome(int i) {
 	//Temp storage for swapping.
 	string tempString;
 	double tempDouble, average;
@@ -290,11 +272,10 @@ void dataManipE(int i) {
 	int d = i;
 	int j, flag = 1; //Counter and flag to confirm swap.
 	
-	cout << "Option E: Median household income." << endl;
 	//Shell sort.
 	while(flag || (d > 1)) {
 		flag = 0;
-		d = (d+1) / 2;
+		d = (d + 1) / 2;
 		for (j = 0; j < (i - d); j++) {
 			if (household[j + d].income > household[j].income) {
 				//Swap Household Income Array

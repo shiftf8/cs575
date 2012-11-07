@@ -46,18 +46,18 @@ int main()
 	cout << netPay << endl;
 */
 	
-	cout << fixed << showpoint << setprecision(2);
-	cout << "Employee \t" << setw (15) << employeeInitials << endl;
-	cout << "Hours Worked \t" << setw (15) << numberOfHoursWorked << endl;
-	cout << "Hourly Rate \t" << setw (15) << employeePayRate << endl;
-	cout << "Total Wages \t" << setw (15) << grossWages << endl;
-	cout << endl << "Deductions" << endl;
-	cout << "Federal Withholding: \t" << setw (7) << federalWithholding << endl;
-	cout << "State Withholding \t" << setw (7) << stateWithholding << endl;
-	cout << "Hospitalization \t" << setw (7) << hospitalization << endl;
-	cout << "Union Dues \t" << setw (15) << unionWithholding << endl;
-	cout << "Total Deductions \t" << setw (7) << totalDeductions << endl;
-	cout << "Net Pay \t" << setw (15) << netPay << endl;
+	cout << fixed << showpoint << setprecision(2)
+		<< "Employee \t" << setw (15) << employeeInitials << endl
+		<< "Hours Worked \t" << setw (15) << numberOfHoursWorked << endl
+		<< "Hourly Rate \t" << setw (15) << employeePayRate << endl
+		<< "Total Wages \t" << setw (15) << grossWages << endl
+		<< endl << "Deductions" << endl
+		<< "Federal Withholding: \t" << setw (7) << federalWithholding << endl
+		<< "State Withholding \t" << setw (7) << stateWithholding << endl
+		<< "Hospitalization \t" << setw (7) << hospitalization << endl
+		<< "Union Dues \t" << setw (15) << unionWithholding << endl
+		<< "Total Deductions \t" << setw (7) << totalDeductions << endl
+		<< "Net Pay \t" << setw (15) << netPay << endl;
 	
 //	system("pause");
 	return 0;

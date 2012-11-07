@@ -22,17 +22,17 @@ void calcOutHigherThanAve(int arr[], int x, float average);
 void closeFiles(void);
 
 int main() {
-    openFiles();
-    arraySort();
-	closeFiles();
+    //openFiles();
+	arraySort();
+	//closeFiles();
 	
-	system("pause");
+	//system("pause");
 	return 0;
 }
 
-void openFiles() {
+/*void openFiles() {
 	//Open data file.
-	inData.open ("C:\\temp\\Lab7\\data.txt");
+	inData.open ("data.txt");
 
 	//Checking for error opening data file.
 	if (!inData) {
@@ -41,15 +41,15 @@ void openFiles() {
 	}
 
 	//New files.
-	outData.open("C:\\temp\\Lab7\\output.txt");
-}
+	outData.open("output.txt");
+}*/
 
 void arraySort() {
 	string input;
 	int inputInt, evens[length], odds[length];
 	int i = 0, j = 0; //counters
 	
-	while (inData >> input) {
+	while (cin >> input) {
 		stringstream(input) >> inputInt;
 		//cout << inputInt << endl;
 		if (!(inputInt % 2)) {
@@ -66,8 +66,7 @@ void arraySort() {
 	
 	//cout << odds[4];
 	calcOut(evens, i);
-	//cout << endl << endl;
-    outData << endl << endl;
+	cout << endl << endl;
 	calcOut(odds, j);
 }
 
@@ -76,8 +75,7 @@ void calcOut(int arr[], int x) {
 	int high = 0, low = 1000;
 	int i; //counter
 	
-    //cout << "Array [ ";
-    outData << "Array [ ";
+	cout << "Array [ ";
 	for (i = 0; i < x; i++) {
 		total = total + arr[i];
 		//cout << " + " << arr[i] << " = " << total;
@@ -85,34 +83,26 @@ void calcOut(int arr[], int x) {
 		//cout << high << " ";
 		if (arr[i] < low) low = arr[i];
 		//cout << low << " ";
-    	//cout << arr[i] << " ";
-    	outData << arr[i] << " ";
+		cout << arr[i] << " ";
 	}
-    //cout << "]" << endl;
-    outData << "]" << endl;
+	cout << "]" << endl;
 	
 	average = total / x;
-    //cout << "Average = " << average << "\tHigh = "<< high << "\tLow = " << low << endl;
-    outData << "Average = " << average << "\tHigh = "<< high << "\tLow = " << low << endl;
+	cout << "Average = " << average << "\tHigh = "<< high << "\tLow = " << low << endl;
 	calcOutHigherThanAve(arr, x, average);	
 }
 
 void calcOutHigherThanAve(int arr[], int x, float average) {
 	int j; //counter
 	
-    //cout << "Numbers higher than average [ ";
-    outData << "Numbers higher than average [ ";
+	cout << "Numbers higher than average [ ";
 	for (j = 0; j < x; j++) {
-		if (arr[j] > average) {
-            //cout << arr[j] << " ";
-            outData << arr[j] << " ";
-		}
+		if (arr[j] > average) cout << arr[j] << " ";
 	}
-	//cout << "]";
-	outData << "]";
+	cout << "]";
 }
 
 void closeFiles() {
-    inData.close();
+	inData.close();
 	outData.close();
 }

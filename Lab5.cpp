@@ -19,7 +19,7 @@ int main() {
 	float average;
 	int i, j; //counters
 	
-	inData.open ("C:\\temp\\data.txt");
+	inData.open ("data.txt");
 
 	//Checking for error with file.
 	if (!inData) {
@@ -27,7 +27,7 @@ int main() {
 		exit (1);
 	}
 	
-	outData.open ("C:\\temp\\newfile.txt");
+	outData.open ("newfile.txt");
 	
 	for (max = 0, min = 1000, total = 0, i = 0, j = 0; i < 7; i++) {
 		while (inData >> strInput) {

@@ -41,7 +41,7 @@ int main() {
     billing();
     closeFiles();
 
-	system("pause");
+    system("pause");
 	return 0;
 }
 
